@@ -2,9 +2,9 @@
 #include <M5Unified.h>
 #include <lvgl.h>
 
-static lv_disp_draw_buf_t draw_buf;
 static lv_color_t* buf1 = nullptr;
 static lv_color_t* buf2 = nullptr;
+static uint32_t draw_buf_pixels = 0;
 static lv_obj_t* counter_label = nullptr;
 static lv_obj_t* slider_label = nullptr;
 static lv_obj_t* arc = nullptr;
@@ -14,7 +14,7 @@ static int tap_count = 0;
 static volatile bool frame_dirty = false;
 
 /* LVGL -> M5GFX flush */
-static void lvgl_flush_cb(lv_disp_drv_t* disp, const lv_area_t* area, lv_color_t* color_p)
+static void lvgl_flush_cb(lv_display_t* disp, const lv_area_t* area, uint8_t* px_map)
 {
   const int32_t w = area->x2 - area->x1 + 1;
   const int32_t h = area->y2 - area->y1 + 1;
@@ -23,16 +23,16 @@ static void lvgl_flush_cb(lv_disp_drv_t* disp, const lv_area_t* area, lv_color_t
   M5.Display.setAddrWindow(area->x1, area->y1, w, h);
 
   // Use blocking transfer to avoid LVGL reusing draw buffers before DMA completes.
-  M5.Display.pushPixels((uint16_t*)color_p, (uint32_t)w * (uint32_t)h, false);
+  M5.Display.pushPixels((uint16_t*)px_map, (uint32_t)w * (uint32_t)h, false);
   M5.Display.endWrite();
 
   frame_dirty = true;
 
-  lv_disp_flush_ready(disp);
+  lv_display_flush_ready(disp);
 }
 
 /* M5Unified Touch -> LVGL pointer device */
-static void lvgl_touch_read_cb(lv_indev_drv_t* indev, lv_indev_data_t* data)
+static void lvgl_touch_read_cb(lv_indev_t* indev, lv_indev_data_t* data)
 {
   // M5.Touch is Touch_Class; getCount/getDetail are the main calls. :contentReference[oaicite:2]{index=2}
   if (M5.Touch.getCount() > 0) {
@@ -80,7 +80,7 @@ static void on_tap_button(lv_event_t* e)
 static void on_slider_change(lv_event_t* e)
 {
   if (lv_event_get_code(e) == LV_EVENT_VALUE_CHANGED) {
-    lv_obj_t* slider = lv_event_get_target(e);
+    lv_obj_t* slider = (lv_obj_t*)lv_event_get_target(e);
     const int value = lv_slider_get_value(slider);
     set_demo_value(value);
   }
@@ -89,7 +89,7 @@ static void on_slider_change(lv_event_t* e)
 static void on_arc_change(lv_event_t* e)
 {
   if (lv_event_get_code(e) == LV_EVENT_VALUE_CHANGED) {
-    lv_obj_t* arc_obj = lv_event_get_target(e);
+    lv_obj_t* arc_obj = (lv_obj_t*)lv_event_get_target(e);
     const int value = lv_arc_get_value(arc_obj);
     set_demo_value(value);
   }
@@ -110,7 +110,7 @@ static bool init_draw_buffers(uint32_t scr_w, uint32_t scr_h)
     buf2 = (lv_color_t*)heap_caps_malloc(buf_bytes, MALLOC_CAP_SPIRAM | MALLOC_CAP_8BIT);
 
     if (buf1 && buf2) {
-      lv_disp_draw_buf_init(&draw_buf, buf1, buf2, buf_pixels);
+      draw_buf_pixels = buf_pixels;
       return true;
     }
 
@@ -154,19 +154,15 @@ void setup()
     }
   }
 
-  static lv_disp_drv_t disp_drv;
-  lv_disp_drv_init(&disp_drv);
-  disp_drv.hor_res = scr_w;
-  disp_drv.ver_res = scr_h;
-  disp_drv.flush_cb = lvgl_flush_cb;
-  disp_drv.draw_buf = &draw_buf;
-  lv_disp_drv_register(&disp_drv);
+  lv_display_t* display = lv_display_create(scr_w, scr_h);
+  lv_display_set_flush_cb(display, lvgl_flush_cb);
+  lv_display_set_buffers(display, buf1, buf2,
+                         (uint32_t)(draw_buf_pixels * sizeof(lv_color_t)),
+                         LV_DISPLAY_RENDER_MODE_PARTIAL);
 
-  static lv_indev_drv_t indev_drv;
-  lv_indev_drv_init(&indev_drv);
-  indev_drv.type = LV_INDEV_TYPE_POINTER;
-  indev_drv.read_cb = lvgl_touch_read_cb;
-  lv_indev_drv_register(&indev_drv);
+  lv_indev_t* indev = lv_indev_create();
+  lv_indev_set_type(indev, LV_INDEV_TYPE_POINTER);
+  lv_indev_set_read_cb(indev, lvgl_touch_read_cb);
 
   lv_obj_set_style_bg_color(lv_scr_act(), lv_color_black(), LV_PART_MAIN);
   lv_obj_set_style_bg_opa(lv_scr_act(), LV_OPA_COVER, LV_PART_MAIN);
@@ -262,4 +258,5 @@ void loop()
   }
 
   delay(1);
+  
 }

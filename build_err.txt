@@ -1,0 +1,34 @@
+In file included from .pio/libdeps/m5stack-tab5/lvgl/src/draw/vg_lite/lv_draw_vg_lite.h:16,
+                 from .pio/libdeps/m5stack-tab5/lvgl/src/draw/vg_lite/lv_draw_vg_lite_img.c:10:
+.pio/libdeps/m5stack-tab5/lvgl/src/draw/vg_lite/../../lv_conf_internal.h:77:17: note: '#pragma message: Possible failure to include lv_conf.h, please read the comment in this file if you get errors'
+   77 |         #pragma message("Possible failure to include lv_conf.h, please read the comment in this file if you get errors")
+      |                 ^~~~~~~
+In file included from .pio/libdeps/m5stack-tab5/lvgl/src/draw/vg_lite/lv_draw_vg_lite.h:16,
+                 from .pio/libdeps/m5stack-tab5/lvgl/src/draw/vg_lite/lv_draw_vg_lite_label.c:10:
+.pio/libdeps/m5stack-tab5/lvgl/src/draw/vg_lite/../../lv_conf_internal.h:77:17: note: '#pragma message: Possible failure to include lv_conf.h, please read the comment in this file if you get errors'
+   77 |         #pragma message("Possible failure to include lv_conf.h, please read the comment in this file if you get errors")
+      |                 ^~~~~~~
+In file included from .pio/libdeps/m5stack-tab5/lvgl/src/draw/vg_lite/lv_draw_vg_lite.h:16,
+                 from .pio/libdeps/m5stack-tab5/lvgl/src/draw/vg_lite/lv_draw_vg_lite_layer.c:10:
+.pio/libdeps/m5stack-tab5/lvgl/src/draw/vg_lite/../../lv_conf_internal.h:77:17: note: '#pragma message: Possible failure to include lv_conf.h, please read the comment in this file if you get errors'
+   77 |         #pragma message("Possible failure to include lv_conf.h, please read the comment in this file if you get errors")
+      |                 ^~~~~~~
+In file included from .pio/libdeps/m5stack-tab5/lvgl/src/draw/vg_lite/lv_draw_vg_lite.h:16,
+                 from .pio/libdeps/m5stack-tab5/lvgl/src/draw/vg_lite/lv_draw_vg_lite_line.c:10:
+.pio/libdeps/m5stack-tab5/lvgl/src/draw/vg_lite/../../lv_conf_internal.h:77:17: note: '#pragma message: Possible failure to include lv_conf.h, please read the comment in this file if you get errors'
+   77 |         #pragma message("Possible failure to include lv_conf.h, please read the comment in this file if you get errors")
+      |                 ^~~~~~~
+In file included from .pio/libdeps/m5stack-tab5/lvgl/src/draw/vg_lite/lv_draw_vg_lite.h:16,
+                 from .pio/libdeps/m5stack-tab5/lvgl/src/draw/vg_lite/lv_draw_vg_lite_mask_rect.c:10:
+.pio/libdeps/m5stack-tab5/lvgl/src/draw/vg_lite/../../lv_conf_internal.h:77:17: note: '#pragma message: Possible failure to include lv_conf.h, please read the comment in this file if you get errors'
+   77 |         #pragma message("Possible failure to include lv_conf.h, please read the comment in this file if you get errors")
+      |                 ^~~~~~~
+In file included from .pio/libdeps/m5stack-tab5/lvgl/src/draw/vg_lite/lv_draw_vg_lite.h:16,
+                 from .pio/libdeps/m5stack-tab5/lvgl/src/draw/vg_lite/lv_draw_vg_lite_triangle.c:10:
+.pio/libdeps/m5stack-tab5/lvgl/src/draw/vg_lite/../../lv_conf_internal.h:77:17: note: '#pragma message: Possible failure to include lv_conf.h, please read the comment in this file if you get errors'
+   77 |         #pragma message("Possible failure to include lv_conf.h, please read the comment in this file if you get errors")
+      |                 ^~~~~~~
+C:/Users/bryan/.platformio/packages/toolchain-riscv32-esp/bin/../lib/gcc/riscv32-esp-elf/14.2.0/../../../../riscv32-esp-elf/bin/ar.exe: reopening .pio/build/m5stack-tab5/lib7fa/lvgl/misc/lv_rb.c.o: No such file or directory
+C:/Users/bryan/.platformio/packages/toolchain-riscv32-esp/bin/../lib/gcc/riscv32-esp-elf/14.2.0/../../../../riscv32-esp-elf/bin/ar.exe: .pio\build\m5stack-tab5\lib7fa\liblvgl.a: error reading .pio/build/m5stack-tab5/lib7fa/lvgl/font/lv_font_montserrat_46.c.o: file truncated
+*** [.pio\build\m5stack-tab5\lib7fa\liblvgl.a] Error 1
+========================= [FAILED] Took 45.37 seconds =========================

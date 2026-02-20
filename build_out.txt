@@ -1,0 +1,31 @@
+Processing m5stack-tab5 (platform: https://github.com/pioarduino/platform-espressif32.git#54.03.20; board: esp32-p4-evboard; framework: arduino)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/espressif32/esp32-p4-evboard.html
+PLATFORM: Espressif 32 (54.3.20+sha.c6f1f41) > Espressif ESP32-P4 Function EV Board
+HARDWARE: ESP32P4 360MHz, 500KB RAM, 16MB Flash
+DEBUG: Current (cmsis-dap) External (cmsis-dap, esp-bridge, esp-prog, iot-bus-jtag, jlink, minimodule, olimex-arm-usb-ocd, olimex-arm-usb-ocd-h, olimex-arm-usb-tiny-h, olimex-jtag-tiny, tumpa)
+PACKAGES: 
+ - framework-arduinoespressif32 @ 3.2.0 
+ - framework-arduinoespressif32-libs @ 5.4.0+sha.2f7dcd862a 
+ - tool-esptoolpy @ 4.8.8 
+ - tool-mklittlefs @ 3.2.0 
+ - tool-riscv32-esp-elf-gdb @ 14.2.0+20240403 
+ - tool-xtensa-esp-elf-gdb @ 14.2.0+20240403 
+ - toolchain-riscv32-esp @ 14.2.0+20241119
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 44 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- M5Unified @ 0.2.13
+|-- M5GFX @ 0.2.19
+|-- lvgl @ 9.5.0
+Building in release mode
+Compiling .pio\build\m5stack-tab5\lib7fa\lvgl\draw\vg_lite\lv_draw_vg_lite_img.c.o
+Compiling .pio\build\m5stack-tab5\lib7fa\lvgl\draw\vg_lite\lv_draw_vg_lite_label.c.o
+Compiling .pio\build\m5stack-tab5\lib7fa\lvgl\draw\vg_lite\lv_draw_vg_lite_layer.c.o
+Compiling .pio\build\m5stack-tab5\lib7fa\lvgl\draw\vg_lite\lv_draw_vg_lite_line.c.o
+Compiling .pio\build\m5stack-tab5\lib7fa\lvgl\draw\vg_lite\lv_draw_vg_lite_mask_rect.c.o
+Compiling .pio\build\m5stack-tab5\lib7fa\lvgl\draw\vg_lite\lv_draw_vg_lite_triangle.c.o
+Archiving .pio\build\m5stack-tab5\lib7fa\liblvgl.a

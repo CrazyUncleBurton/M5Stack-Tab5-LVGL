@@ -1,27 +1,16 @@
 # M5Stack-Tab5-LCD-Tutorial
 
 by Bryan A. "CrazyUncleBurton" Thompson
-Last Updated 2/17/2026
+Last Updated 2/19/2026
 
 ## Concepts
 
-In this project we show you how to download a project from GitHub, then build the project and upload to the M5Stack / Tab5 microcontroller.  The program will read from two I2C sensors and then output the data to the microcontroller LCD and to the USB serial port.  In this tutorial we implement flicker-free display technology powered by the M5Canvas function.
-
-We also changed the metric to the Imperial Units of Freedom that allowed us to land on the moon.
+In this project we show you how to download a project from GitHub, then build the project and upload to the M5Stack / Tab5 microcontroller.  The program is based on LVGL, a popular and free UI creation tool.  The program shows a button widget, a slider widget and an arc slider widget.  Changing the arc changes the slider and vv.  
 
 ## Hardware
 
 Microcontroller:  M5Stack Tab5 (ESP32-P4NRW32@RISC-V 32-bit Dual-core 360MHz + LP Single-core 40MHz)
-Display:  5" (1280 x 720) IPS TFT LCD and ILI9881C controller with GT911 capacitive touch controller
-Sensor: M5Stack Unit ENV III Temp/Pressure/Humidity sensor + 4 wire Grove cable
-
-Connect cable to sensor, then connect to red port on Microcontroller, which is connected to the internal I2C bus on GP32/33.
-
-## Prerequisites
-
-- Install VS Code
-- Install PlatformIO extension
-- Install Microsoft C/C++ Extension
+Display:  5" (1280 x 720) IPS TFT LCD and ST7213 controller and capacitive touch controller.
 
 ## Project Documentation
 
@@ -37,25 +26,27 @@ If your other projects stop building after this update, it may be because they d
 
 platform = espressif32@~6.5.0; (or whatever version you want. 6.5–6.8 map to Arduino core 2.0.x)
 
-## Turning the M5Stack Tab5 On and Off
+## M5Stack Tab5 Information
+
+### Turning the M5Stack Tab5 On and Off
 
 1. Press the square white button once to turn on the device.
 
 2. Press the square white button twice to turn off the device.
 
-## Charging the Battery
+### Charging the Battery
 
 The battery only charges when the device is on and configured.
 
-## Programming the M5Stack Tab5
+### Programming the M5Stack Tab5
 
 1. Enter Download Mode - With USB cable or battery connected, long‑press the Reset button (2 seconds) until the internal green LED rapidly blinks; release to enter download mode and await firmware flashing.
 
 2. Program like you would any other VS Code Project.  Click the PlatformIO:Upload button (shaped like a right arrow).
 
-## Tab5 Pin Map
+### Tab5 Pin Map
 
-### Camera
+#### Camera
 
 G32 - Camera SCL
 G33 - Camera SDA
@@ -67,7 +58,7 @@ CSI_CLKN (Dedicated) - CAM_CSI_CKN
 CSI_DATAP0 (Dedicated) - CSI_DOP
 CSI_DATAN0 (Dedicated) - CSI_DON
 
-### ES8388 2 Channel Audio Codec
+#### ES8388 2 Channel Audio Codec
 
 ES8388 (0x10)
 G30 - MCLK
@@ -77,7 +68,7 @@ G29 - LRCK
 G32 - SCL
 G33 - SDA
 
-## ES7210 4 CH ADC 24-bit Possible Mic Array
+#### ES7210 4 CH ADC 24-bit Possible Mic Array
 
 ES7210 (0x40)
 G30 - MCLK
@@ -87,7 +78,7 @@ G29 - LRCK
 G32 - SCL
 G33 - SDA
 
-### LCD ILI9881C/ST7123
+#### LCD Controller ST7123
 
 G22 - LEDA
 DSI_CLKN (Dedicated) - DSI_CK_N
@@ -97,7 +88,7 @@ DSI_DATAP1 (Dedicated) - DSI_D1_P
 DSI_DATAN0 (Dedicated) - DSI_D0_N
 DSI_DATAP0 (Dedicated) - DSI_D0_P
 
-### Touch
+#### Touch
 
 GT911 (0x14) / ST7123 (0x55)
 G31 - SDA
@@ -105,25 +96,25 @@ G32 - SCL
 G23 - TP_INT
 E1.P5 - TP_RST
 
-### BMI270
+#### BMI270
 
 BMI270 (0x68)
 G32 - SCL
 G31 - SDA
 
-### RTC(RX8130CE)
+#### RTC(RX8130CE)
 
 RX8130CE (0x32)
 G32 - SCL
 G31 - SDA
 
-### INA226
+#### INA226
 
 INA226 (0x40)
 G32 - SCL
 G31 - SDA
 
-### ESP32-C6
+#### ESP32-C6
 
 G11 - SDIO2_D0
 G10 - SDIO2_D1
@@ -135,7 +126,7 @@ G15 - RESET
 G14 - IO2
 G35 - BOOT
 
-### microSD
+#### microSD
 
 microSD SPI Mode
 G9 - MISO
@@ -151,42 +142,48 @@ G42 - DAT3
 G43 - CLK
 G44 - CMD
 
-### RS485
+#### RS485
 
 SIT3088
 G21 - RX
 G20 - TX
 G34 - DIR
 
-### HY2.0-4P PORT A
+#### HY2.0-4P PORT A
+
+COnnected to the External I2C pins and bus.  Refer to this as Wire() in Arduino.
 
 Black - GND
 Red - +5V
 Yellow - G53 - Ext SDA
 White - G54 - Ext SCL
 
-## I2C (Internal)
+### I2C (Internal Bus - sensors inside the Tab5)
+
+Refer to this as Wire1() in Arduino.
 
 G32 - Int SCL
 G33 - Int SDA
 
-### I2C (External - Port A)
+#### I2C (External Bus - Port A)
+
+Refer to this as Wire() in Arduino.
 
 G53 - Ext SCL
 G54 - Ext SDA
 
-### SPI
+#### SPI
 
 G18 - MOSI
 G19 - MISO
 G5 - SCK
 
-### Serial
+#### Serial
 
 RXD0 - G38
 TXD0 - G37
 
-### M5Bus
+#### M5Bus
 
 Note:  The bus is the same layout as the old CORE2 bus with old GPIO map
 Pin 1 - GND
@@ -220,7 +217,7 @@ Pin 28 - 5V
 Pin 29 - HVIN
 Pin 30 - BAT
 
-### Ext Port 1
+#### Ext Port 1
 
 G50
 G1
@@ -233,7 +230,7 @@ EXT 5V
 G0
 G49
 
-### Ext Port 2 - RS485
+#### Ext Port 2 - RS485
 
 Pin 1 - Black - GND
 Pin 2 - Red - HVIN
@@ -242,7 +239,7 @@ Pin 4 - Green - 485B
 Pin 5 - White - SDA - G32
 Pin 6 - Blue - SCL - G32
 
-### USB C Ext
+#### USB C Ext
 
 Pin 1 - USB1_D+
 Pin 2 - USB1_D-
@@ -254,11 +251,11 @@ Pin 4 - 5VIN
 Microcontroller Info:
 <https://docs.m5stack.com/en/core/Tab5>
 
-Sensor Info:
-<https://docs.m5stack.com/en/unit/envIII>
-
 M5GFX Display Library:
 <https://docs.m5stack.com/en/arduino/m5gfx/m5gfx_functions>
 
 M5Canvas:
 <https://docs.m5stack.com/en/arduino/m5gfx/m5gfx_canvas>
+
+LVGL Docs:
+<https://docs.lvgl.io/master/>
