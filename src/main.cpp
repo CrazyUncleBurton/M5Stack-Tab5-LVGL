@@ -1,3 +1,10 @@
+/*
+  CrazyUncleBurton's M5Unified + LVGL demo
+  by Bryan A. "CrazyUncleBurton" Thompson
+  Last Updated 02/19/2026
+
+*/
+
 #include <Arduino.h>
 #include <M5Unified.h>
 #include <lvgl.h>
@@ -258,5 +265,5 @@ void loop()
   }
 
   delay(1);
-  
+
 }
