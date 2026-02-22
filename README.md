@@ -1,7 +1,7 @@
 # M5Stack-Tab5-LCD-Tutorial
 
 by Bryan A. "CrazyUncleBurton" Thompson
-Last Updated 2/19/2026
+Last Updated 2/21/2026
 
 ## Concepts
 
@@ -15,16 +15,6 @@ Display:  5" (1280 x 720) IPS TFT LCD and ST7213 controller and capacitive touch
 ## Project Documentation
 
 See the project files / docs folder for a PDF of the tutorial.
-
-## ESP32 Arduino Core 3.x Info
-
-This project updates the Arduino Core to v3.x.  This enables all kinds of things in ESP32 like the high-res GPTimer, the high-res RMT transmit/receive peripheral, and FreeRTOS.  Make sure the platform= line in the platformio.ini file looks like this:
-
-platform = https://github.com/pioarduino/platform-espressif32.git#54.03.20; (Arduino Core 3.x)
-
-If your other projects stop building after this update, it may be because they don't explicitly state that they are intended for an older version of the Arduino Core. To do that, update the platformio.ini file and replace the platform line in the older project(s) with this:
-
-platform = espressif32@~6.5.0; (or whatever version you want. 6.5–6.8 map to Arduino core 2.0.x)
 
 ## M5Stack Tab5 Information
 
@@ -245,6 +235,16 @@ Pin 1 - USB1_D+
 Pin 2 - USB1_D-
 Pin 3 - GND
 Pin 4 - 5VIN
+
+## ESP32 Arduino Core 3.x Info
+
+This project updates the Arduino Core to v3.x.  This enables all kinds of things in ESP32 like the high-res GPTimer, the high-res RMT transmit/receive peripheral, and FreeRTOS.  Make sure the platform= line in the platformio.ini file looks like this:
+
+platform = https://github.com/pioarduino/platform-espressif32.git#54.03.20; (Arduino Core 3.x)
+
+If your other projects stop building after this update, it may be because they don't explicitly state that they are intended for an older version of the Arduino Core. To do that, update the platformio.ini file and replace the platform line in the older project(s) with this:
+
+platform = espressif32@~6.5.0; (or whatever version you want. 6.5–6.8 map to Arduino core 2.0.x)
 
 ## References
 
